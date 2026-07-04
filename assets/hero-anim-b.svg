@@ -1,0 +1,94 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>自動化完了を祝うループアニメーション</title>
+<desc>ダーク背景にゴールドのギアが回転し、チェックマークがバウンドし、紙吹雪が舞うアニメーション</desc>
+<defs>
+  <style>
+    .bgrect { fill: #0c0a08; }
+    .gear { fill: none; stroke: #c9a25a; stroke-width: 3; opacity: 0.5; }
+    .gear2 { fill: none; stroke: #9c9082; stroke-width: 2; opacity: 0.35; }
+    .ring { fill: none; stroke: #3a2f20; stroke-width: 1.5; }
+    .check-circle { fill: #1a1611; stroke: #c9a25a; stroke-width: 3; }
+    .check-mark { fill: none; stroke: #e3bd7a; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+    .confetti { fill: #c9a25a; }
+    .confetti2 { fill: #e3bd7a; }
+    .confetti3 { fill: #9c9082; }
+
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spinrev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+    .spin { animation: spin 9s linear infinite; transform-origin: 150px 200px; }
+    .spinrev { animation: spinrev 7s linear infinite; transform-origin: 460px 130px; }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .pulse { animation: pulse 2.2s ease-in-out infinite; transform-origin: 300px 200px; }
+
+    @keyframes drawcheck {
+      0% { stroke-dasharray: 0 60; }
+      30% { stroke-dasharray: 60 60; }
+      70% { stroke-dasharray: 60 60; }
+      85% { stroke-dasharray: 0 60; opacity: 0; }
+      86% { opacity: 0; }
+      90% { opacity: 1; }
+      100% { stroke-dasharray: 0 60; }
+    }
+    .drawcheck { animation: drawcheck 3.6s ease-in-out infinite; stroke-dasharray: 0 60; }
+
+    @keyframes floatup {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      15% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-220px) rotate(200deg); opacity: 0; }
+    }
+    .c1 { animation: floatup 3.6s ease-in infinite; animation-delay: 0s; }
+    .c2 { animation: floatup 4.1s ease-in infinite; animation-delay: 0.6s; }
+    .c3 { animation: floatup 3.3s ease-in infinite; animation-delay: 1.1s; }
+    .c4 { animation: floatup 4.4s ease-in infinite; animation-delay: 1.6s; }
+    .c5 { animation: floatup 3.8s ease-in infinite; animation-delay: 2.0s; }
+    .c6 { animation: floatup 3.5s ease-in infinite; animation-delay: 0.3s; }
+  </style>
+</defs>
+
+<rect class="bgrect" width="600" height="400"/>
+
+<g class="spin">
+  <circle class="gear" cx="150" cy="200" r="46"/>
+  <g stroke="#c9a25a" stroke-width="6" opacity="0.5">
+    <rect x="146" y="146" width="8" height="16"/>
+    <rect x="146" y="238" width="8" height="16"/>
+    <rect x="96" y="196" width="16" height="8"/>
+    <rect x="188" y="196" width="16" height="8"/>
+    <rect x="113" y="129" width="8" height="16" transform="rotate(45 117 137)"/>
+    <rect x="171" y="247" width="8" height="16" transform="rotate(45 175 255)"/>
+    <rect x="179" y="113" width="8" height="16" transform="rotate(-45 183 121)"/>
+    <rect x="121" y="263" width="8" height="16" transform="rotate(-45 125 271)"/>
+  </g>
+</g>
+
+<g class="spinrev">
+  <circle class="gear2" cx="460" cy="130" r="30"/>
+  <g stroke="#9c9082" stroke-width="4" opacity="0.35">
+    <rect x="457" y="92" width="6" height="12"/>
+    <rect x="457" y="158" width="6" height="12"/>
+    <rect x="420" y="127" width="12" height="6"/>
+    <rect x="488" y="127" width="12" height="6"/>
+  </g>
+</g>
+
+<g>
+  <circle class="confetti c1" cx="220" cy="320" r="5"/>
+  <rect class="confetti2 c2" x="380" y="300" width="9" height="9"/>
+  <circle class="confetti3 c3" cx="320" cy="330" r="4"/>
+  <rect class="confetti c4" x="260" y="310" width="7" height="7"/>
+  <circle class="confetti2 c5" cx="360" cy="320" r="5"/>
+  <rect class="confetti3 c6" x="300" y="305" width="8" height="8"/>
+</g>
+
+<g class="pulse">
+  <circle class="ring" cx="300" cy="200" r="74"/>
+  <circle class="check-circle" cx="300" cy="200" r="56"/>
+  <path class="check-mark drawcheck" d="M 275 200 L 293 218 L 328 178"/>
+</g>
+
+</svg>

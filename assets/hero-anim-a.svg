@@ -1,0 +1,81 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>タイピングする手元のループアニメーション</title>
+<desc>ダーク背景にゴールドのキーボードと手のイラストが、キーを打つ動きとコードのカーソル点滅をループするアニメーション</desc>
+<defs>
+  <style>
+    .bgrect { fill: #0c0a08; }
+    .desk { fill: #1a1611; }
+    .key { fill: #232019; stroke: #3a2f20; stroke-width: 1; }
+    .hand { fill: #e3c9a0; }
+    .sleeve { fill: #2a2520; }
+    .screen { fill: #14110d; stroke: #3a2f20; stroke-width: 1; }
+    .cursor { fill: #e3bd7a; }
+    @keyframes press1 { 0%,100% { transform: translateY(0); } 10% { transform: translateY(3px); } 20% { transform: translateY(0); } }
+    @keyframes press2 { 0%,100% { transform: translateY(0); } 35% { transform: translateY(3px); } 45% { transform: translateY(0); } }
+    @keyframes press3 { 0%,100% { transform: translateY(0); } 60% { transform: translateY(3px); } 70% { transform: translateY(0); } }
+    @keyframes press4 { 0%,100% { transform: translateY(0); } 85% { transform: translateY(3px); } 95% { transform: translateY(0); } }
+    .k1 { animation: press1 2.4s ease-in-out infinite; transform-origin: center; }
+    .k2 { animation: press2 2.4s ease-in-out infinite; transform-origin: center; }
+    .k3 { animation: press3 2.4s ease-in-out infinite; transform-origin: center; }
+    .k4 { animation: press4 2.4s ease-in-out infinite; transform-origin: center; }
+    @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    .blinker { animation: blink 1s step-end infinite; }
+    @keyframes typeline {
+      0% { width: 0; }
+      40% { width: 86px; }
+      55% { width: 86px; }
+      95% { width: 0; }
+      100% { width: 0; }
+    }
+    .codeline1 { animation: typeline 4.8s ease-in-out infinite; }
+    .codeline2 { animation: typeline 4.8s ease-in-out infinite; animation-delay: 0.4s; }
+    @keyframes handsway {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(2px); }
+    }
+    .handsway { animation: handsway 2.4s ease-in-out infinite; }
+  </style>
+</defs>
+
+<rect class="bgrect" width="600" height="400"/>
+
+<rect class="screen" x="150" y="40" width="300" height="170" rx="6"/>
+<clipPath id="clipline1"><rect x="166" y="68" width="86" height="8"/></clipPath>
+<rect x="166" y="68" width="86" height="8" rx="2" fill="#9c9082" opacity="0.4" class="codeline1" clip-path="url(#clipline1)"/>
+<rect x="166" y="84" width="86" height="8" rx="2" fill="#9c9082" opacity="0.3" class="codeline2"/>
+<rect x="166" y="100" width="50" height="8" rx="2" fill="#3a2f20"/>
+<rect x="226" y="100" width="6" height="10" class="cursor blinker"/>
+
+<rect x="150" y="210" width="300" height="14" rx="4" fill="#1a1611"/>
+
+<g class="handsway">
+<rect class="desk" x="60" y="270" width="480" height="20" rx="4"/>
+
+<g transform="translate(140,250)">
+  <rect class="key k1" x="0" y="0" width="34" height="28" rx="5"/>
+  <rect class="key k2" x="40" y="0" width="34" height="28" rx="5"/>
+  <rect class="key k3" x="80" y="0" width="34" height="28" rx="5"/>
+  <rect class="key k4" x="120" y="0" width="34" height="28" rx="5"/>
+  <rect class="key k2" x="160" y="0" width="34" height="28" rx="5"/>
+  <rect class="key k3" x="200" y="0" width="34" height="28" rx="5"/>
+  <rect class="key k1" x="240" y="0" width="34" height="28" rx="5"/>
+  <rect class="key k4" x="280" y="0" width="34" height="28" rx="5"/>
+
+  <rect class="key k3" x="0" y="34" width="34" height="28" rx="5"/>
+  <rect class="key k1" x="40" y="34" width="34" height="28" rx="5"/>
+  <rect class="key k4" x="80" y="34" width="34" height="28" rx="5"/>
+  <rect class="key k2" x="120" y="34" width="34" height="28" rx="5"/>
+  <rect class="key k1" x="160" y="34" width="34" height="28" rx="5"/>
+  <rect class="key k3" x="200" y="34" width="34" height="28" rx="5"/>
+  <rect class="key k4" x="240" y="34" width="34" height="28" rx="5"/>
+  <rect class="key k2" x="280" y="34" width="34" height="28" rx="5"/>
+</g>
+
+<g transform="translate(190,295)">
+  <path class="sleeve" d="M0,60 Q10,10 60,5 L120,5 Q170,10 180,60 Z"/>
+  <ellipse class="hand" cx="40" cy="20" rx="34" ry="20"/>
+  <ellipse class="hand" cx="140" cy="20" rx="34" ry="20"/>
+</g>
+</g>
+
+</svg>
