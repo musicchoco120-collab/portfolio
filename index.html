@@ -722,21 +722,22 @@
   <div class="small-label serif-en">CONTACT</div>
   <h2 class="mincho">お問い合わせ</h2>
   <p class="lead">本プロジェクトに関するご相談・ご質問はこちらからお送りください。</p>
-  <form class="contact-form" onsubmit="event.preventDefault();">
+  <form class="contact-form" id="contact-form" novalidate>
     <div class="contact-row">
       <div class="field">
         <label for="name">お名前</label>
-        <input type="text" id="name" placeholder="山田 太郎">
+        <input type="text" id="name" name="name" placeholder="山田 太郎" required autocomplete="name" maxlength="100">
       </div>
       <div class="field">
         <label for="email">メールアドレス</label>
-        <input type="email" id="email" placeholder="name@example.com">
+        <input type="email" id="email" name="email" placeholder="name@example.com" required autocomplete="email" maxlength="254">
       </div>
     </div>
     <div class="field">
       <label for="message">お問い合わせ内容</label>
-      <textarea id="message" rows="5" placeholder="ご相談内容をご記入ください"></textarea>
+      <textarea id="message" name="message" rows="5" placeholder="ご相談内容をご記入ください" required maxlength="2000"></textarea>
     </div>
+    <div id="form-error" role="alert" style="color:#e07070;font-size:13px;min-height:20px;"></div>
     <button type="submit" class="contact-submit serif-en">SEND MESSAGE</button>
   </form>
 </section>
@@ -748,25 +749,87 @@
 </div>
 
 <script>
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  document.querySelectorAll('.case-media').forEach(el => {
-    el.addEventListener('click', () => {
-      lightboxImg.src = el.getAttribute('data-full');
-      lightbox.classList.add('open');
-    });
-  });
-  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+  // ---- セキュリティ: src に安全なパスのみ許可 ----
+  function isSafeSrc(src) {
+    return typeof src === 'string' && /^assets\/[\w\-]+\.(png|jpg|jpeg|webp|svg)$/.test(src);
+  }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+  // ---- ライトボックス ----
+  function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    if (!lightbox || !lightboxImg) return;
+
+    function openLightbox(src) {
+      if (!isSafeSrc(src)) return;
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+      lightbox.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
+    document.querySelectorAll('.case-media').forEach(el => {
+      el.addEventListener('click', () => openLightbox(el.getAttribute('data-full')));
     });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('.in-view').forEach(el => observer.observe(el));
+    lightbox.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  }
+
+  // ---- スクロールアニメーション ----
+  function initScrollObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.in-view').forEach(el => observer.observe(el));
+  }
+
+  // ---- フォームバリデーション ----
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    const errorEl = document.getElementById('form-error');
+    if (!form || !errorEl) return;
+
+    function validateEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function sanitizeText(value) {
+      return value.trim().replace(/[<>]/g, '');
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      errorEl.textContent = '';
+
+      const name    = sanitizeText(form.name.value);
+      const email   = sanitizeText(form.email.value);
+      const message = sanitizeText(form.message.value);
+
+      if (!name)                    { errorEl.textContent = 'お名前を入力してください。'; return; }
+      if (!validateEmail(email))    { errorEl.textContent = '正しいメールアドレスを入力してください。'; return; }
+      if (message.length < 10)     { errorEl.textContent = 'お問い合わせ内容を10文字以上入力してください。'; return; }
+
+      // 現在はフロントのみ（送信先未設定）
+      errorEl.style.color = '#7ecfa0';
+      errorEl.textContent = '送信内容を確認しました。（現在フロントのみ実装）';
+    });
+  }
+
+  // ---- 初期化 ----
+  initLightbox();
+  initScrollObserver();
+  initContactForm();
 </script>
 
 </body>
