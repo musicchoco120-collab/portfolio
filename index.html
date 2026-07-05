@@ -11,6 +11,9 @@
 <link rel="canonical" href="https://musicchoco120-collab.github.io/portfolio/">
 
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="ZERO TO AUTO | AI自動化の開発記録">
@@ -27,7 +30,7 @@
 <meta name="twitter:image" content="https://musicchoco120-collab.github.io/portfolio/assets/og-image.png">
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap');
+  /* Google Fonts は <head> の <link> で読み込み済み */
 
   :root {
     --bg: #0c0a08;
@@ -530,8 +533,35 @@
     border: 1px solid var(--gold);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   @media (max-height: 880px) {
     .scroll-cue { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .stack-row { grid-template-columns: repeat(2, 1fr); }
+    .contact-form { gap: 16px; }
+    .case-tags { gap: 6px; }
+    .case-tags span { font-size: 9px; padding: 4px 8px; }
+    footer { padding: 32px 24px; font-size: 11px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 120px 16px 48px; }
+    .hero h1 { font-size: 24px; }
+    .hero-tag { font-size: 9px; }
+    .stack-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .stack-item { padding: 16px 8px; }
+    .case-media, .case-text { padding: 0 16px; }
+    .contact-section { padding: 60px 16px; }
   }
 
   @media (max-width: 900px) {
@@ -566,8 +596,8 @@
 <section class="hero">
   <div class="hero-media">
     <div class="hero-anim">
-      <img class="anim-a" src="assets/hero-anim-a.svg" alt="タイピングする手元のアニメーション">
-      <img class="anim-b" src="assets/hero-anim-b.svg" alt="自動化完了を祝うアニメーション">
+      <img class="anim-a" src="assets/hero-anim-a.svg" alt="タイピングする手元のアニメーション" fetchpriority="high">
+      <img class="anim-b" src="assets/hero-anim-b.svg" alt="自動化完了を祝うアニメーション" fetchpriority="high">
     </div>
   </div>
   <div class="hero-content">
@@ -616,7 +646,7 @@
 
   <div class="case">
     <div class="case-media img-zoom in-view" data-full="assets/case-1.png">
-      <img src="assets/case-1.png" alt="file-summarizerスキルの3段階パイプライン検証">
+      <img src="assets/case-1.png" alt="file-summarizerスキルの3段階パイプライン検証" loading="lazy" width="1776" height="299">
     </div>
     <div class="case-text in-view">
       <div class="case-index">CASE 01</div>
@@ -636,7 +666,7 @@
 
   <div class="case">
     <div class="case-media img-zoom in-view" data-full="assets/case-2.png">
-      <img src="assets/case-2.png" alt="medical-seo-blog-writerの実行結果">
+      <img src="assets/case-2.png" alt="medical-seo-blog-writerの実行結果" loading="lazy" width="938" height="722">
     </div>
     <div class="case-text in-view">
       <div class="case-index">CASE 02</div>
@@ -656,7 +686,7 @@
 
   <div class="case">
     <div class="case-media img-zoom in-view" data-full="assets/case-3.png">
-      <img src="assets/case-3.png" alt="ad-guideline-checkerの検証結果">
+      <img src="assets/case-3.png" alt="ad-guideline-checkerの検証結果" loading="lazy" width="1394" height="416">
     </div>
     <div class="case-text in-view">
       <div class="case-index">CASE 03</div>
